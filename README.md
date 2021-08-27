@@ -1,0 +1,1 @@
+Esse é um projeto em que eu testo as aplicações de python para o EV3
