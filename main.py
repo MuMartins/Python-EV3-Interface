@@ -14,7 +14,9 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 
 # Create your objects here.
 ev3 = EV3Brick()
+battery = ev3.battery.voltage()
 
 
 # Write your program here.
-ev3.speaker.beep()
+if  button.LEFT in ev3.buttons.pressed():
+    print(battery)
