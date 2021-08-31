@@ -6,20 +6,12 @@ from pybricks.tools import wait
 ev3 = EV3Brick()
 
 def button_released(button):
-    if button not in ev3.buttons():
-        return True
-    
-    else: 
-        return False
+    return button not in ev3.buttons.pressed()
 
 def button_pressed(button):
-    if button in ev3.buttons():
-        return True
-    
-    else:
-        return False
+    return button in ev3.buttons.pressed()
 
-def button_pressed_released(button):
+def wait_button_bumped(button):
     while not button_pressed(button):
         wait(10)
     
