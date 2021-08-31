@@ -26,6 +26,9 @@ def main():
         # MENU SELEÇÃO
         menu_seleção()
 
+        # MENU FUNÇÃO
+        if button_pressed == Button.CENTER:
+            menu_função_def()
 # Run the code if it's in the same name
 if __name__ == '__main__':
     # Execute the code

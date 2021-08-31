@@ -48,9 +48,6 @@ def menu_seleção_def():
         menu_interface_selecionador -= 1
         if menu_interface_selecionador == 0:
             menu_interface_selecionador = 4
-    
-    if button_pressed == Button.CENTER:
-        menu_função_def()
 
 def menu_função_def():
     if menu_interface_selecionador == 1:
