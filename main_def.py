@@ -1,63 +1,25 @@
-def button_pressed_def(ev3):
-    pressed = []
-    while len(pressed) != 1:
-        pressed = ev3.buttons.pressed()
-    button = pressed[0]
+#!/usr/bin/env pybricks-micropython
+from pybricks.hubs import EV3Brick
+from pybricks.parameters import Button
+from pybricks.tools import wait
 
-    # Now wait for the button to be released.
-    while any(ev3.buttons.pressed()):
-        pass
-
-    # Return which button was pressed.
-    return button
-
-def menu_display_def():
-    if menu_interface_selecionador == 1:
-        ev3.screen.load_image('./IMG_MENU/display_menu.png')
-
-    if menu_interface_selecionador == 2:
-        ev3.screen.load_image('./IMG_MENU/display_calibração.png')
+def button_released(button):
+    if button not in ev3brick.buttons():
+        return True
     
-    if menu_interface_selecionador == 3:
-        ev3.screen.load_image('./IMG_MENU/display_problemas.png')
+    else: 
+        return False
 
-    if menu_interface_selecionador == 4:
-        ev3.screen.load_image('./IMG_MENU/display_portview.png')
-
-def menu_seleção_def():
-    if button_pressed == Button.DOWN:
-        menu_interface_selecionador += 2
-        if menu_interface_selecionador == 5:
-            menu_interface_selecionador = 1
-        if menu_interface_selecionador == 6:
-            menu_interface_selecionador = 2
-
-    if button_pressed == Button.UP:
-        menu_interface_selecionador -= 2
-        if menu_interface_selecionador == 0:
-            menu_interface_selecionador = 4
-        if menu_interface_selecionador < 0:
-            menu_interface_selecionador = 3
-
-    if button_pressed == Button.RIGHT:
-        menu_interface_selecionador += 1
-        if menu_interface_selecionador == 5:
-            menu_interface_selecionador = 1
+def button_pressed(button):
+    if button in ev3brick.buttons():
+        return True
     
-    if button_pressed == Button.LEFT:
-        menu_interface_selecionador -= 1
-        if menu_interface_selecionador == 0:
-            menu_interface_selecionador = 4
+    else:
+        return False
 
-def menu_função_def():
-    if menu_interface_selecionador == 1:
-        ev3.screen.load_image('./IMG_TESTE/display_problemas_teste.png')
-
-    if menu_interface_selecionador == 2:
-        ev3.screen.load_image('./IMG_TESTE/display_problemas_teste.png')
-
-    if menu_interface_selecionador == 3:
-        ev3.screen.load_image('./IMG_TESTE/display_problemas_teste.png')
-
-    if menu_interface_selecionador == 4:
-        ev3.screen.load_image('./IMG_TESTE/display_problemas_teste.png')
+def button_pressed_released(button):
+    while not button_pressed(button):
+        wait(10)
+    
+    while not button_released(button):
+        wait(10)
