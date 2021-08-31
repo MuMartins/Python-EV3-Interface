@@ -10,17 +10,19 @@ from main_def import *
 ev3 = EV3Brick()
 # Write your program here.
 while True: #menu-seleção
-    menu_interface_selecionador = 1
+    menu_interface_selecionador = 0
     while True:
         # MENU DISPLAY
-        if menu_interface_selecionador == 1:
+        if menu_interface_selecionador == 0:
             ev3.screen.load_image('display_menu.png')
-        if menu_interface_selecionador == 2:
+
+        if menu_interface_selecionador == 1:
             ev3.screen.load_image('display_calibração.png')
         
-        if menu_interface_selecionador == 3:
+        if menu_interface_selecionador == 2:
             ev3.screen.load_image('display_problemas.png')
-        if menu_interface_selecionador == 4:
+
+        if menu_interface_selecionador == 3:
             ev3.screen.load_image('display_portview.png')
 
         # MENU SELEÇÃO
@@ -28,40 +30,29 @@ while True: #menu-seleção
         if button_pressed(Button.DOWN):
             while not button_released(Button.DOWN):
                 wait(10)
-            menu_interface_selecionador += 2
-            if menu_interface_selecionador == 5:
-                menu_interface_selecionador = 1
-            if menu_interface_selecionador == 6:
-                menu_interface_selecionador = 2
+            menu_interface_selecionador = (menu_interface_selecionador + 2) % 4
 
         if Button.UP in ev3.buttons.pressed():
         if button_pressed(Button.UP):
             while not button_released(Button.UP):
                 wait(10)
-            menu_interface_selecionador -= 2
-            if menu_interface_selecionador == 0:
-                menu_interface_selecionador = 4
-            if menu_interface_selecionador < 0:
-                menu_interface_selecionador = 3
+            menu_interface_selecionador = (menu_interface_selecionador - 2) % 4
 
         if Button.RIGHT in ev3.buttons.pressed():
         if button_pressed(Button.RIGHT):
             while not button_released(Button.RIGHT):
                 wait(10)
-            menu_interface_selecionador += 1
-            if menu_interface_selecionador == 5:
-                menu_interface_selecionador = 1
+            menu_interface_selecionador = (menu_interface_selecionador + 1) % 4
 
         if Button.LEFT in ev3.buttons.pressed():
 
         if button_pressed(Button.LEFT):
             while not button_released(Button.LEFT):
                 wait(10)
-            menu_interface_selecionador -= 1
-            if menu_interface_selecionador == 0:
-                menu_interface_selecionador = 4
-
-        if menu_interface_selecionador == 1 and Button.CENTER in ev3.buttons.pressed():
+            menu_interface_selecionador = (menu_interface_selecionador - 1) % 4
+        
+        # MENU FUNÇÃO
+        if menu_interface_selecionador == 0 and Button.CENTER in ev3.buttons.pressed():
             break
     while True:
         ev3.speaker.beep() 
