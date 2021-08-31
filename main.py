@@ -30,26 +30,34 @@ while True: #menu-seleção
             ev3.screen.load_image('display_portview.png')
 
         # MENU SELEÇÃO
-        if Button.DOWN in ev3.buttons.pressed():
+        if button_pressed(Button.DOWN):
+            while not button_released(Button.DOWN):
+                wait(10)
             menu_interface_selecionador += 2
             if menu_interface_selecionador == 5:
                 menu_interface_selecionador = 1
             if menu_interface_selecionador == 6:
                 menu_interface_selecionador = 2
 
-        if Button.UP in ev3.buttons.pressed():
+        if button_pressed(Button.UP):
+            while not button_released(Button.UP):
+                wait(10)
             menu_interface_selecionador -= 2
             if menu_interface_selecionador == 0:
                 menu_interface_selecionador = 4
             if menu_interface_selecionador < 0:
                 menu_interface_selecionador = 3
 
-        if Button.RIGHT in ev3.buttons.pressed():
+        if button_pressed(Button.RIGHT):
+            while not button_released(Button.RIGHT):
+                wait(10)
             menu_interface_selecionador += 1
             if menu_interface_selecionador == 5:
                 menu_interface_selecionador = 1
-        
-        if Button.LEFT in ev3.buttons.pressed():
+
+        if button_pressed(Button.LEFT):
+            while not button_released(Button.LEFT):
+                wait(10)
             menu_interface_selecionador -= 1
             if menu_interface_selecionador == 0:
                 menu_interface_selecionador = 4
