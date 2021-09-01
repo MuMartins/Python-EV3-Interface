@@ -11,6 +11,7 @@ ev3 = EV3Brick()
 # Write your program here.
 while True: #menu-seleção
     menu_interface_selecionador = 0
+    interface_selecionador = 0
     while True:
         # MENU DISPLAY
         if menu_interface_selecionador == 0:
