@@ -59,6 +59,8 @@ while True:
     
     # Interface função
     elif button_pressed(Button.CENTER):
+        while not button_released(Button.CENTER):
+            wait(10)
         if menu_selecionador_single == 0:
             while True:
                 if button_pressed(Button.RIGHT):
