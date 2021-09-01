@@ -3,6 +3,7 @@
 from pybricks.hubs import EV3Brick
 from pybricks.parameters import Button, Color
 from pybricks.tools import wait
+from pybricks.media.ev3dev import Font
 
 from main_def import *
 
@@ -12,10 +13,10 @@ ev3 = EV3Brick()
 # Código principal
 menu_selecionador = [
     # A ordem é X1, Y1, X2, Y2, Preenchimento, Cor
-    [3, 14, 85, 62, 1, False, Color.BLACK],     # MENU
-    [90, 14, 172, 62, 1, False, Color.BLACK],   # CALIBRACAO
-    [3, 65, 85, 113, 1, False, Color.BLACK],    # PROBLEMAS
-    [90, 65, 172, 113, 1, False, Color.BLACK]   # PORT_VIEW
+    [2, 19, 86, 71, 1, False, Color.BLACK],     # MENU
+    [89, 21, 173, 71, 1, False, Color.BLACK],   # CALIBRACAO
+    [2, 72, 86, 122, 1, False, Color.BLACK],    # PROBLEMAS
+    [89, 72, 173, 122, 1, False, Color.BLACK]   # PORT_VIEW
 ]
 
 # Variáveis
@@ -24,17 +25,26 @@ menu_selecionador_single_last = 3
 
 round_selecionador = 0
 
+current_battery = ev3.battery.voltage()
+small_font = Font(size=10)
+
 # Função menu
 def set_menu_selecionador():
     global menu_selecionador, menu_selecionador_single_last
     if menu_selecionador_single != menu_selecionador_single_last:
-        ev3.screen.load_image('./IMG_MENU/display.png')
+        ev3.screen.load_image('./IMG_MENU/display_bottom_battery2.png')
         ev3.screen.draw_box(*menu_selecionador[menu_selecionador_single])
         menu_selecionador_single_last = menu_selecionador_single
+
+def current_battery_text():
+    ev3.screen.set_font(small_font)
+    ev3.screen.draw_text(124, 10, current_battery, Color.BLACK, None)
 
 # Code
 while True:
     set_menu_selecionador()
+    current_battery_text()
+    print(current_battery)
 
     # Interface selecionador
     if button_pressed(Button.DOWN):
