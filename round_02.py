@@ -18,6 +18,4 @@ right_motor = Motor(Port.C)
 
 # Código 
 def round_02():
-    global saida_abortada
     cm_sem_correção(10)
-    saida_abortada = True

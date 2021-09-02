@@ -7,6 +7,8 @@ from pybricks.tools import wait
 from pybricks.robotics import DriveBase
 
 from system_buttons import *
+from verificacao_aborta import *
+from verificacao_aborta import saida_aborta
 from round_01 import *
 from round_02 import *
 from round_03 import *
@@ -18,16 +20,12 @@ from time import sleep
 # Definição do brick como ev3
 ev3 = EV3Brick()
 
-
-# Variável responsável por acabar o round e começar o proximo
-saida_abortada = False
-
 # Código
 def set_rounds():
     round_selecionador = 0
-    global saida_abortada
+    global saida_aborta
     while True:
-        # Selecionador
+        # Round selecionador
         if button_pressed(Button.RIGHT):
             while not button_released(Button.RIGHT):
                 wait(10)
@@ -38,63 +36,42 @@ def set_rounds():
                 wait(10)
             round_selecionador = (round_selecionador - 1) % 4
         
-        # Display e função
+        # Round display
         if round_selecionador == 0:
             ev3.screen.load_image('./IMG_ROUNDS/round_01')
-            if button_pressed(Button.CENTER):
-                Thread(target=round_01).start()
-
-                while not saida_abortada:
-                    if button_pressed(Button.DOWN):
-                        robot.stop()
-                        saida_abortada = True
-
-                if saida_abortada == True:
-                    sleep(0.5)
-                    round_selecionador = (round_selecionador + 1) % 4
-                    saida_abortada = False
         
-        if round_selecionador == 1:
+        elif round_selecionador == 1:
             ev3.screen.load_image('./IMG_ROUNDS/round_02')
-            if button_pressed(Button.CENTER):
-                Thread(target=round_02).start()
 
-                while not saida_abortada:
-                    if button_pressed(Button.DOWN):
-                        robot.stop()
-                        saida_abortada = True
-
-                if saida_abortada == True:
-                    sleep(0.5)
-                    round_selecionador = (round_selecionador + 1) % 4
-                    saida_abortada = False
-
-        if round_selecionador == 2:
+        elif round_selecionador == 2:
             ev3.screen.load_image('./IMG_ROUNDS/round_03')
-            if button_pressed(Button.CENTER):
-                Thread(target=round_03).start()
 
-                while not saida_abortada:
-                    if button_pressed(Button.DOWN):
-                        robot.stop()
-                        saida_abortada = True
-
-                if saida_abortada == True:
-                    sleep(0.5)
-                    round_selecionador = (round_selecionador + 1) % 4
-                    saida_abortada = False
-
-        if round_selecionador == 3:
+        elif round_selecionador == 3:
             ev3.screen.load_image('./IMG_ROUNDS/round_04')
-            if button_pressed(Button.CENTER):
-                Thread(target=round_04).start()
 
-                while not saida_abortada:
-                    if button_pressed(Button.DOWN):
-                        robot.stop()
-                        saida_abortada = True
-                        
-                if saida_abortada == True:
-                    sleep(0.5)
-                    round_selecionador = (round_selecionador + 1) % 4
-                    saida_abortada = False
+        # Round função
+        if button_pressed(Button.CENTER):
+            Thread(target=verificacao_aborta).start()
+            
+            if saida_aborta == True:
+                sleep(0.5)
+                round_selecionador = (round_selecionador + 1) % 4
+                saida_aborta = False
+
+            if round_selecionador == 0:
+                round_01()
+                round_selecionador = (round_selecionador + 1) % 4
+
+            if round_selecionador == 1:
+                round_02()
+                round_selecionador = (round_selecionador + 1) % 4
+
+            if round_selecionador == 2:
+                round_03()
+                round_selecionador = (round_selecionador + 1) % 4
+
+            if round_selecionador == 3:
+                round_04()
+                round_selecionador = (round_selecionador + 1) % 4
+
+            
