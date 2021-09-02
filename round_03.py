@@ -16,12 +16,8 @@ ev3 = EV3Brick()
 left_motor = Motor(Port.B)
 right_motor = Motor(Port.C)
 
-# Drive base (aqui será adicionado tudo referente ao robô, fazendo o calculo automático de giro, milimitros e etc)
-robot = DriveBase(left_motor, right_motor, wheel_diameter=49.5, axle_track=95)
-
 # Código 
-def round_03(saida_fim):
-    robot.turn(360)
-    ev3.speaker.beep()
-    saida_fim = True
-    return saida_fim
+def round_03():
+    global saida_abortada
+    cm_sem_correção(10)
+    saida_abortada = True
