@@ -7,7 +7,7 @@ from pybricks.media.ev3dev import Font
 
 from system_buttons import *
 from interface_rounds import *
-from interface_calibracao import *
+from interface_calibração import *
 from interface_problemas import *
 from interface_portview import *
 
@@ -41,14 +41,14 @@ def set_current_battery():
     current_battery = ev3.battery.voltage()
     return current_battery
 
-def current_battery_text():
+def current_battery_box():
     ev3.screen.set_font(small_font)
     ev3.screen.draw_text(132, 6, set_current_battery(), Color.BLACK, None)
 
 # Code
 while True:
     set_menu_selecionador()
-    current_battery_text()
+    current_battery_box()
 
     # Interface selecionador
     if button_pressed(Button.DOWN):

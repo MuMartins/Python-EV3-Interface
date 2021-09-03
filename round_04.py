@@ -13,9 +13,10 @@ from cm_e_curva import *
 ev3 = EV3Brick()
 
 # Iniciando os motores
-left_motor = Motor(Port.B)
-right_motor = Motor(Port.C)
+#left_motor = Motor(Port.B)
+#right_motor = Motor(Port.C)
 
 # Código 
 def round_04():
-    cm_sem_correção(10)
+    ev3.speaker.say('round 4 nesse caralho')
+    ev3.light.on(Color.RED)

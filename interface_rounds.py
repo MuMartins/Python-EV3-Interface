@@ -7,15 +7,12 @@ from pybricks.tools import wait
 from pybricks.robotics import DriveBase
 
 from system_buttons import *
-from verificacao_aborta import *
-from verificacao_aborta import saida_aborta
 from round_01 import *
 from round_02 import *
 from round_03 import *
 from round_04 import *
 
 from threading import Thread
-from time import sleep
 
 # Definição do brick como ev3
 ev3 = EV3Brick()
@@ -23,7 +20,6 @@ ev3 = EV3Brick()
 # Código
 def set_rounds():
     round_selecionador = 0
-    global saida_aborta
     while True:
         # Round selecionador
         if button_pressed(Button.RIGHT):
@@ -51,13 +47,6 @@ def set_rounds():
 
         # Round função
         if button_pressed(Button.CENTER):
-            Thread(target=verificacao_aborta).start()
-            
-            if saida_aborta == True:
-                sleep(0.5)
-                round_selecionador = (round_selecionador + 1) % 4
-                saida_aborta = False
-
             if round_selecionador == 0:
                 round_01()
                 round_selecionador = (round_selecionador + 1) % 4
