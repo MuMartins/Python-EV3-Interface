@@ -1,7 +1,8 @@
 #!/usr/bin/env pybricks-micropython
 # Importação dos módulos utilizados
 from pybricks.hubs import EV3Brick
-from pybricks.parameters import Button, Color
+from pybricks.ev3devices import Motor
+from pybricks.parameters import Button, Color, Port
 from pybricks.media.ev3dev import Font
 
 from system_buttons import *
@@ -10,6 +11,10 @@ from system_buttons import *
 ev3 = EV3Brick()
 
 small_font = Font(size=15)
+
+# Iniciando os motores
+left_motor = Motor(Port.B)
+right_motor = Motor(Port.C)
 
 # Código
 def set_current_battery():
@@ -27,3 +32,9 @@ def set_problemas():
         else:
             ev3.screen.load_image('./IMG_PROBLEMAS/display_problemas4.png')
             current_battery_text()
+            while True:
+                if left_motor.run_angle(200, "----", then=pass, wait=True):
+                    left_motor.run(200)
+                    break
+                else:
+                    ev3.light.on(Color.RED)

@@ -31,11 +31,11 @@ def set_rounds():
             while not button_released(Button.LEFT):
                 wait(10)
             round_selecionador = (round_selecionador - 1) % 4
-        
+
         # Round display
         if round_selecionador == 0:
             ev3.screen.load_image('./IMG_ROUNDS/round_01')
-        
+
         elif round_selecionador == 1:
             ev3.screen.load_image('./IMG_ROUNDS/round_02')
 
@@ -45,22 +45,18 @@ def set_rounds():
         elif round_selecionador == 3:
             ev3.screen.load_image('./IMG_ROUNDS/round_04')
 
-        # Round função
         if button_pressed(Button.CENTER):
             if round_selecionador == 0:
                 round_01()
-                round_selecionador = (round_selecionador + 1) % 4
-
-            if round_selecionador == 1:
-                round_02()
-                round_selecionador = (round_selecionador + 1) % 4
-
-            if round_selecionador == 2:
-                round_03()
-                round_selecionador = (round_selecionador + 1) % 4
-
-            if round_selecionador == 3:
-                round_04()
-                round_selecionador = (round_selecionador + 1) % 4
-
+                round_selecionador = 1
             
+            elif round_selecionador == 1:
+                round_02()
+                round_selecionador = 2
+            
+            elif round_selecionador == 2:
+                round_03()
+                round_selecionador = 3
+            
+            elif round_selecionador == 3:
+                round_04()

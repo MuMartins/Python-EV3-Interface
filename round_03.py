@@ -2,7 +2,7 @@
 # Importação dos módulos utilizados
 from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import Motor
-from pybricks.parameters import Button, Color, Port
+from pybricks.parameters import Button, Port, Stop
 from pybricks.tools import wait
 from pybricks.robotics import DriveBase
 
@@ -13,10 +13,11 @@ from cm_e_curva import *
 ev3 = EV3Brick()
 
 # Iniciando os motores
-#left_motor = Motor(Port.B)
-#right_motor = Motor(Port.C)
+left_motor = Motor(Port.B)
+right_motor = Motor(Port.C)
 
 # Código 
 def round_03():
-    ev3.speaker.say('round 3 nesse caralho')
-    ev3.light.on(Color.RED)
+    move_curva(360)
+    left_motor.stop(Stop.BRAKE)
+    right_motor.stop(Stop.BRAKE)

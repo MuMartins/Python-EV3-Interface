@@ -46,44 +46,49 @@ def current_battery_box():
     ev3.screen.draw_text(132, 6, set_current_battery(), Color.BLACK, None)
 
 # Code
-while True:
-    set_menu_selecionador()
-    current_battery_box()
+def main():
+    global menu_selecionador_single
+    while True:
+        set_menu_selecionador()
+        current_battery_box()
 
-    # Interface selecionador
-    if button_pressed(Button.DOWN):
-        while not button_released(Button.DOWN):
-            wait(10)
-        menu_selecionador_single = (menu_selecionador_single + 2) % 4
-    
-    elif button_pressed(Button.UP):
-        while not button_released(Button.UP):
-            wait(10)
-        menu_selecionador_single = (menu_selecionador_single - 2) % 4
-    
-    elif button_pressed(Button.RIGHT):
-        while not button_released(Button.RIGHT):
-            wait(10)
-        menu_selecionador_single = (menu_selecionador_single + 1) % 4
-    
-    elif button_pressed(Button.LEFT):
-        while not button_released(Button.LEFT):
-            wait(10)
-        menu_selecionador_single = (menu_selecionador_single - 1) % 4
-    
-    # Interface função
-    elif button_pressed(Button.CENTER):
-        while not button_released(Button.CENTER):
-            wait(10)
-
-        if menu_selecionador_single == 0:
-            set_rounds()
-
-        elif menu_selecionador_single == 1:
-            set_calibração()
+        # Interface selecionador
+        if button_pressed(Button.DOWN):
+            while not button_released(Button.DOWN):
+                wait(10)
+            menu_selecionador_single = (menu_selecionador_single + 2) % 4
         
-        elif menu_selecionador_single == 2:
-            set_problemas()
+        elif button_pressed(Button.UP):
+            while not button_released(Button.UP):
+                wait(10)
+            menu_selecionador_single = (menu_selecionador_single - 2) % 4
         
-        elif menu_selecionador_single == 3:
-            set_portview()
+        elif button_pressed(Button.RIGHT):
+            while not button_released(Button.RIGHT):
+                wait(10)
+            menu_selecionador_single = (menu_selecionador_single + 1) % 4
+        
+        elif button_pressed(Button.LEFT):
+            while not button_released(Button.LEFT):
+                wait(10)
+            menu_selecionador_single = (menu_selecionador_single - 1) % 4
+        
+        # Interface função
+        elif button_pressed(Button.CENTER):
+            while not button_released(Button.CENTER):
+                wait(10)
+
+            if menu_selecionador_single == 0:
+                set_rounds()
+
+            elif menu_selecionador_single == 1:
+                set_calibração()
+            
+            elif menu_selecionador_single == 2:
+                set_problemas()
+            
+            elif menu_selecionador_single == 3:
+                set_portview()
+
+if __name__ == '__main__':
+    main()
