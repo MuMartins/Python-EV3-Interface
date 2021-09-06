@@ -9,10 +9,9 @@ from system_buttons import *
 # Definição do brick como ev3
 ev3 = EV3Brick()
 
-def set_calibração():
-    ev3.screen.clear()
+def set_calibracao():
     while True:
         if button_pressed(Button.DOWN):
             break
         else:
-            ev3.screen.draw_circle(70, 90, 20, fill=True)
+            ev3.screen.load_image('./IMG_PROBLEMAS/display_calibracao_enter.png')

@@ -7,7 +7,7 @@ from pybricks.media.ev3dev import Font
 
 from system_buttons import *
 from interface_rounds import *
-from interface_calibração import *
+from interface_calibracao import *
 from interface_problemas import *
 from interface_portview import *
 
@@ -82,7 +82,7 @@ def main():
                 set_rounds()
 
             elif menu_selecionador_single == 1:
-                set_calibração()
+                set_calibracao()
             
             elif menu_selecionador_single == 2:
                 set_problemas()

@@ -6,6 +6,7 @@ from pybricks.parameters import Button, Color, Port
 from pybricks.media.ev3dev import Font
 
 from system_buttons import *
+from problemas_def import *
 
 # Definição do brick como ev3
 ev3 = EV3Brick()
@@ -30,11 +31,7 @@ def set_problemas():
         if button_pressed(Button.DOWN):
             break
         else:
-            ev3.screen.load_image('./IMG_PROBLEMAS/display_problemas4.png')
+            ev3.screen.load_image('./IMG_PROBLEMAS/display_problemas6.png')
             current_battery_text()
-            while True:
-                if left_motor.run_angle(200, "----", then=pass, wait=True):
-                    left_motor.run(200)
-                    break
-                else:
-                    ev3.light.on(Color.RED)
+            teste_de_problemas_motores()
+            teste_de_problemas_sensores()
