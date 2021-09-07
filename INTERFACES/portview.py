@@ -4,15 +4,15 @@ from pybricks.hubs import EV3Brick
 from pybricks.parameters import Button, Color
 from pybricks.tools import wait
 
-from system_buttons import *
+import SYSTEM.battery as battery
+import SYSTEM.buttons as buttons
 
 # Definição do brick como ev3
 ev3 = EV3Brick()
 
-def set_portview():
+
+def start():
     ev3.screen.clear()
-    while True:
-        if button_pressed(Button.DOWN):
-            break
-        else:
-            ev3.screen.draw_box(50,30,90,60)
+    ev3.screen.load_image('./IMAGES/display_portview.png')
+    while not buttons.pressed(Button.DOWN):
+        pass
