@@ -1,5 +1,6 @@
 #!/usr/bin/env pybricks-micropython
 # Importação dos módulos utilizados
+from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import Motor, ColorSensor, GyroSensor
 from pybricks.parameters import Port
 
@@ -7,6 +8,9 @@ from pybricks.parameters import Port
 '''
 Arquivo responsável por checar conexões no brick
 '''
+
+# Definição do brick como ev3
+ev3 = EV3Brick()
 
 
 def motor(port: Port) -> bool:

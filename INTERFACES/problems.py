@@ -27,41 +27,27 @@ ports_coordinates = [
 def start():
     '''Inicia e gerencia a tela de problemas'''
     ev3.screen.clear()
-    font = Font(size=13)
-    ev3.screen.set_font(font)
+    problems_font = Font(size=13)
+    ev3.screen.set_font(problems_font)
     ev3.screen.load_image('./IMAGES/display_problems.png')
     while not buttons.pressed(Button.DOWN):
         battery.voltage_text()
         # Sensores
         ev3.screen.draw_text(
-            *ports_coordinates[0],
-            text=str(check_conections.sensor(Port.S1))
-        )
+            *ports_coordinates[0], text=str(check_conections.sensor(Port.S1)))
         ev3.screen.draw_text(
-            *ports_coordinates[1],
-            text=str(check_conections.sensor(Port.S2))
-        )
+            *ports_coordinates[1], text=str(check_conections.sensor(Port.S2)))
         ev3.screen.draw_text(
-            *ports_coordinates[2],
-            text=str(check_conections.sensor(Port.S3))
-        )
+            *ports_coordinates[2], text=str(check_conections.sensor(Port.S3)))
 
         # Motores
         ev3.screen.draw_text(
-            *ports_coordinates[3],
-            text=str(check_conections.motor(Port.A))
-        )
+            *ports_coordinates[3], text=str(check_conections.motor(Port.A)))
         ev3.screen.draw_text(
-            *ports_coordinates[4],
-            text=str(check_conections.motor(Port.B))
-        )
+            *ports_coordinates[4], text=str(check_conections.motor(Port.B)))
         ev3.screen.draw_text(
-            *ports_coordinates[5],
-            text=str(check_conections.motor(Port.C))
-        )
+            *ports_coordinates[5], text=str(check_conections.motor(Port.C)))
         ev3.screen.draw_text(
-            *ports_coordinates[6],
-            text=str(check_conections.motor(Port.D))
-        )
+            *ports_coordinates[6], text=str(check_conections.motor(Port.D)))
 
     ev3.screen.clear()
