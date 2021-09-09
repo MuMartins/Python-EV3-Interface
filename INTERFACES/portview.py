@@ -8,6 +8,7 @@ from pybricks.media.ev3dev import Font
 import SYSTEM.battery as battery
 import SYSTEM.buttons as buttons
 
+
 # Definição do brick como ev3
 ev3 = EV3Brick()
 
@@ -33,13 +34,16 @@ right_motor = Motor(Port.B)
 left_motor = Motor(Port.C)
 medium_D_motor = Motor(Port.D)
 
+
 def sensor_reflection(sensor_value, sensor_coordinate):
     global last_sensor_value
     portview_font = Font(size=13)
     ev3.screen.set_font(portview_font)
     if sensor_value != last_sensor_value:
-        ev3.screen.draw_box(*ports_coordinates[sensor_coordinate], fill=True, color=Color.WHITE)
-        ev3.screen.draw_text(ports_coordinates[sensor_coordinate][0],ports_coordinates[sensor_coordinate][1], sensor_value)
+        ev3.screen.draw_box(
+            *ports_coordinates[sensor_coordinate], fill=True, color=Color.WHITE)
+        ev3.screen.draw_text(
+            ports_coordinates[sensor_coordinate][0], ports_coordinates[sensor_coordinate][1], sensor_value)
         last_sensor_value = sensor_value
 
 
@@ -48,17 +52,21 @@ def motor_angle(motor_value, motor_coordinate):
     portview_font = Font(size=13)
     ev3.screen.set_font(portview_font)
     if motor_value != last_motor_value:
-        ev3.screen.draw_box(*ports_coordinates[motor_coordinate], fill=True, color=Color.WHITE)
-        ev3.screen.draw_text(ports_coordinates[motor_coordinate][0], ports_coordinates[motor_coordinate][1], motor_value)
+        ev3.screen.draw_box(
+            *ports_coordinates[motor_coordinate], fill=True, color=Color.WHITE)
+        ev3.screen.draw_text(
+            ports_coordinates[motor_coordinate][0], ports_coordinates[motor_coordinate][1], motor_value)
         last_motor_value = motor_value
 
 
-def start():
+def portview():
     '''Inicia e gerencia a tela do portview'''
     ev3.screen.clear()
     ev3.screen.load_image('./IMAGES/display_portview.png')
-    while not buttons.pressed(Button.DOWN):
+    while True:
+        # Mostra o valor atual da bateria
         battery.voltage_text()
+
         # Sensores
         sensor_value_01 = light_sensor_01.reflection()
         sensor_reflection(sensor_value_01, 0)
