@@ -6,6 +6,8 @@ from pybricks.parameters import Port, Stop
 from pybricks.tools import wait
 from pybricks.robotics import DriveBase
 
+import SYSTEM.cm_curve as cm_curve
+
 # Definição do brick como ev3
 ev3 = EV3Brick()
 
@@ -15,7 +17,6 @@ right_motor = Motor(Port.C)
 
 
 def start():
-    left_motor.run(Stop.BRAKE)
-    right_motor.stop(Stop.BRAKE)
-    print('ROUND 1')
-    wait(1000)
+    cm_curve.cm_no_correction(10)
+    cm_curve.move_curve(360)
+    print('SAIDA 1 FINALIZADA')

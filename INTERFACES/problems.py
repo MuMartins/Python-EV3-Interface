@@ -13,36 +13,32 @@ import SYSTEM.check_conections as check_conections
 ev3 = EV3Brick()
 
 ports_coordinates = [
-    [148, 55, 176, 67],  # Port.S1
-    [148, 72, 176, 84],  # Port.S2
+    [148, 55, 176, 67],   # Port.S1
+    [148, 72, 176, 84],   # Port.S2
     [148, 89, 176, 101],  # Port.S3
-    [66, 55, 94, 67],   # Port.A
-    [66, 72, 94, 84],   # Port.B
-    [66, 89, 94, 101],   # Port.C
-    [66, 106, 94, 118]   # Port.D
+    [66, 55, 94, 67],     # Port.A
+    [66, 72, 94, 84],     # Port.B
+    [66, 89, 94, 101],    # Port.C
+    [66, 106, 94, 118]    # Port.D
 ]
 
-last_sensor_value = False
-last_motor_value = False
 
 def sensor_connection(sensor_value, sensor_coordinate):
-    global last_sensor_value
     problems_font = Font(size=13)
     ev3.screen.set_font(problems_font)
-    if sensor_value != last_sensor_value:
-        ev3.screen.draw_box(*ports_coordinates[sensor_coordinate], fill=True, color=Color.WHITE)
-        ev3.screen.draw_text(ports_coordinates[sensor_coordinate][0],ports_coordinates[sensor_coordinate][1], sensor_value)
-        last_sensor_value = sensor_value
+    ev3.screen.draw_box(
+        *ports_coordinates[sensor_coordinate], fill=True, color=Color.WHITE)
+    ev3.screen.draw_text(
+        ports_coordinates[sensor_coordinate][0], ports_coordinates[sensor_coordinate][1], sensor_value)
 
 
 def motor_connection(motor_value, motor_coordinate):
-    global last_motor_value
     problems_font = Font(size=13)
     ev3.screen.set_font(problems_font)
-    if motor_value != last_motor_value:
-        ev3.screen.draw_box(*ports_coordinates[motor_coordinate], fill=True, color=Color.WHITE)
-        ev3.screen.draw_text(ports_coordinates[motor_coordinate][0], ports_coordinates[motor_coordinate][1], motor_value)
-        last_motor_value = motor_value
+    ev3.screen.draw_box(
+        *ports_coordinates[motor_coordinate], fill=True, color=Color.WHITE)
+    ev3.screen.draw_text(
+        ports_coordinates[motor_coordinate][0], ports_coordinates[motor_coordinate][1], motor_value)
 
 
 def start():

@@ -1,9 +1,9 @@
 #!/usr/bin/env pybricks-micropython
 # Importação dos módulos utilizados
 from pybricks.hubs import EV3Brick
-from pybricks.ev3devices import Motor, Stop
+from pybricks.ev3devices import Motor
 from pybricks.parameters import Button, Color, Port
-from pybricks.tools import wait
+from pybricks.tools import wait, StopWatch
 
 import SYSTEM.buttons as buttons
 import LAUNCHES.launch_01 as launch_01
@@ -11,12 +11,24 @@ import LAUNCHES.launch_02 as launch_02
 import LAUNCHES.launch_03 as launch_03
 import LAUNCHES.launch_04 as launch_04
 
+from threading import Thread
+
 # Definição do brick como ev3
 ev3 = EV3Brick()
+
+cronometer = StopWatch()
+
+
+def def_cronometer(timeout: int = 135000):
+    global end_cronometer, cronometer
+    cronometer.resume()
+    if cronometer.time() > timeout:
+        ev3.light.on(Color.RED)
 
 
 def start():
     launch_selected = 0
+    cronometer.reset()
     while True:
         # Round selecionador
         if buttons.pressed(Button.RIGHT):
@@ -44,6 +56,7 @@ def start():
 
         if buttons.pressed(Button.CENTER):
             if launch_selected == 0:
+                Thread(target=def_cronometer).start()
                 launch_01.start()
                 launch_selected = 1
 
@@ -57,3 +70,5 @@ def start():
 
             elif launch_selected == 3:
                 launch_04.start()
+                cronometer.pause()
+                print(cronometer.time())

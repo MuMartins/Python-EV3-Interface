@@ -8,7 +8,6 @@ from pybricks.media.ev3dev import Font
 import SYSTEM.battery as battery
 import SYSTEM.buttons as buttons
 
-
 # Definição do brick como ev3
 ev3 = EV3Brick()
 
@@ -59,11 +58,11 @@ def motor_angle(motor_value, motor_coordinate):
         last_motor_value = motor_value
 
 
-def portview():
+def start():
     '''Inicia e gerencia a tela do portview'''
     ev3.screen.clear()
     ev3.screen.load_image('./IMAGES/display_portview.png')
-    while True:
+    while not buttons.pressed(Button.DOWN):
         # Mostra o valor atual da bateria
         battery.voltage_text()
 
