@@ -13,36 +13,28 @@ left_motor = Motor(Port.B)
 right_motor = Motor(Port.C)
 
 # Definindo os valores do DriveBase
-robot = DriveBase(left_motor, right_motor, wheel_diameter=49.5, axle_track=95)
+wheel_diameter = 49.5
+axle_track = 95
+robot = DriveBase(left_motor, right_motor, wheel_diameter, axle_track)
 
 # Cm sem correção
 
 
 def cm_no_correction(centimeters):
+    global robot
+    left_motor.position = 0
+    right_motor.position = 0
     millimeter = centimeters * 10
     robot.straight(millimeter)
 
 
 # Move curva
 def move_curve(required_turn):
-    # Diametro do giro do robô
-    # Todas as medidas convertidas para centimetros
-    axle_track = 9.5
-    tire_band = 2
-    friction_variable = 1.3
+    global robot
+    left_motor.position = 0
+    right_motor.position = 0
+    # This turns 90 deg/sec and not moving 1 second
+    robot.drive_time(0, required_turn, 1000)
 
-    swivel_diameter = (tire_band * friction_variable) + axle_track
-
-    # Graus necessários
-    wheel_diameter = 4.95
-    spin = 360
-
-    required_degrees = ((swivel_diameter / wheel_diameter)
-                        * (required_turn / spin)) * spin
-
-    # Em ação
-    print(required_degrees)
-    # left_motor.run_angle(360, (-required_degrees),
-    #                      then=Stop.HOLD, wait=False)
-    # right_motor.run_angle(360, required_degrees,
-    #                       then=Stop.HOLD, wait=True)
+    # This stops the motor and brakes for accuracy
+    robot.stop(Stop.BRAKE)

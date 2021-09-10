@@ -17,6 +17,5 @@ right_motor = Motor(Port.C)
 
 
 def start():
-    cm_curve.cm_no_correction(10)
-    cm_curve.move_curve(360)
+    cm_curve.move_curve(90)
     print('SAIDA 1 FINALIZADA')

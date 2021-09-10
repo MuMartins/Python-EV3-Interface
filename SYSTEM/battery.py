@@ -20,4 +20,5 @@ def voltage_text():
     '''Retorna o texto mostrando a tensão atual da bateria'''
     battery_font = Font(size=15)
     ev3.screen.set_font(battery_font)
+    ev3.screen.draw_box(130, 6, 169, 21, fill=True, color=Color.WHITE)
     ev3.screen.draw_text(132, 6, voltage())
