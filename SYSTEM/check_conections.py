@@ -32,3 +32,11 @@ def sensor(port: Port) -> bool:
         except:
             return False
     return True
+
+
+def light_problems():
+    '''Função responsável por mudar a cor dos botões do ev3 dependendo das conexões do brick'''
+    if sensor(Port.S1) and sensor(Port.S2) and sensor(Port.S3) and motor(Port.A) and motor(Port.B) and motor(Port.C) and motor(Port.D) == False:
+        ev3.light.on(Color.RED)
+    else:
+        ev3.light.on(Color.GREEN)

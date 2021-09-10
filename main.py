@@ -6,17 +6,22 @@ from pybricks.tools import wait
 
 import SYSTEM.battery as battery
 import SYSTEM.buttons as buttons
+import SYSTEM.check_conections as check_conections
 import INTERFACES.calibration as calibration
 import INTERFACES.menu_launches as menu_launches
 import INTERFACES.portview as portview
 import INTERFACES.problems as problems
+
+'''
+Arquivo principal do brick responsável pelo gerenciamento da interface
+'''
 
 # Definição do brick como ev3
 ev3 = EV3Brick()
 
 # Código principal
 menu_states = [
-    # A ordem é X1, Y1, X2, Y2, Preenchimento, Cor
+    # Lista com os valores de X1, Y1, X2, Y2, Preenchimentoe e Cor do selecionador da interface
     [3, 27, 85, 75, 1, False, Color.BLACK],     # MENU
     [90, 27, 172, 75, 1, False, Color.BLACK],   # CALIBRACAO
     [3, 78, 85, 126, 1, False, Color.BLACK],    # PROBLEMAS
@@ -30,14 +35,21 @@ state = 0
 def set_state(_state):
     global state, menu_states
     state = _state
+
+    # Coloca a imagem de fundo inicial da interface e desenha o quadrado responsável pela seleção dos estados
     ev3.screen.load_image('./IMAGES/display_main_menu.png')
     ev3.screen.draw_box(*menu_states[state])
+
+    # Mostra o valor atual da bateria e faz a verificação das conexões do brick
     battery.voltage_text()
+    check_conections.light_problems()
 
 
 def main():
+    '''Inicia e gerencia a tela principal da interface'''
     global state
     battery.voltage_text()
+    check_conections.light_problems()
     set_state(state)
     while True:
         # Interface selecionador
@@ -82,6 +94,6 @@ def main():
             elif state == 3:
                 portview.start()
 
-
+# Estrutura de seleção responsável por executar apenas o arquivo com o nome "main"
 if __name__ == '__main__':
     main()

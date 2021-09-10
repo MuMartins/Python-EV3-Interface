@@ -13,6 +13,10 @@ import LAUNCHES.launch_04 as launch_04
 
 from threading import Thread
 
+'''
+Arquivo responsável pelo gereciamento e lançamento das saídas
+'''
+
 # Definição do brick como ev3
 ev3 = EV3Brick()
 
@@ -27,8 +31,10 @@ def def_cronometer(timeout: int = 135000):
 
 
 def start():
+    '''Inicia e gerencia a tela de saídas'''
     launch_selected = 0
     cronometer.reset()
+    ev3.light.on(Color.GREEN)
     while True:
         # Round selecionador
         if buttons.pressed(Button.RIGHT):
@@ -54,6 +60,7 @@ def start():
         elif launch_selected == 3:
             ev3.screen.load_image('./IMAGES/LAUNCHES/04')
 
+        # Round função
         if buttons.pressed(Button.CENTER):
             if launch_selected == 0:
                 Thread(target=def_cronometer).start()
