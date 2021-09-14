@@ -17,11 +17,11 @@ left_motor = Motor(Port.B)
 right_motor = Motor(Port.C)
 
 # Definindo o DriveBase (em milimetros)
-wheel_diameter = 49.5
-axle_track = 95
-robot = DriveBase(left_motor, right_motor, wheel_diameter, axle_track)
+robot = DriveBase(left_motor, right_motor, wheel_diameter=49.5, axle_track=95)
 
 # Definindo o bloco que converte centimetros para milimetros na hora andar com o robô
+
+
 def cm_no_correction(centimeters):
     global robot
     # Reseta o valor dos dois motores grandes para trazer mais precisão
@@ -31,8 +31,8 @@ def cm_no_correction(centimeters):
     # Em ação
     millimeter = centimeters * 10
     robot.straight(millimeter)
-    
-    # Força os motores a parar para trazer mais precisão 
+
+    # Força os motores a parar para trazer mais precisão
     robot.stop(Stop.BRAKE)
 
 
@@ -47,5 +47,5 @@ def move_curve(required_turn):
     # Isso gira 90 graus/segundo sem mover por 1 segundo
     robot.drive_time(0, required_turn, 1000)
 
-    # Força os motores a parar para trazer mais precisão 
+    # Força os motores a parar para trazer mais precisão
     robot.stop(Stop.BRAKE)

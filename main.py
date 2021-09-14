@@ -42,7 +42,6 @@ def set_state(_state):
 
     # Mostra o valor atual da bateria e faz a verificação das conexões do brick
     battery.voltage_text()
-    check_conections.light_problems()
 
 
 def main():
@@ -52,6 +51,9 @@ def main():
     check_conections.light_problems()
     set_state(state)
     while True:
+        # Verifica as conexões do brick mudando o led para vermelho caso haja algum erro
+        check_conections.light_problems()
+
         # Interface selecionador
         if buttons.pressed(Button.DOWN):
             while not buttons.released(Button.DOWN):
@@ -94,6 +96,21 @@ def main():
             elif state == 3:
                 portview.start()
 
+
+def debug():
+    '''Função para debug!'''
+    while True:
+        check_conections.light_problems()
+        wait(1000)
+
+
 # Estrutura de seleção responsável por executar apenas o arquivo com o nome "main"
 if __name__ == '__main__':
-    main()
+    _debug = False
+    if _debug:
+        debug()
+    else:
+        try:
+            main()
+        except Exception as e:
+            print(e)

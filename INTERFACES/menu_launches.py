@@ -24,16 +24,19 @@ cronometer = StopWatch()
 
 
 def def_cronometer(timeout: int = 135000):
-    global end_cronometer, cronometer
+    global cronometer
+    cronometer.reset()
     cronometer.resume()
-    if cronometer.time() > timeout:
-        ev3.light.on(Color.RED)
+    print('cronometro iniciado')
+    while cronometer.time() < timeout:
+        pass
+
+    ev3.light.on(Color.RED)
 
 
 def start():
     '''Inicia e gerencia a tela de saídas'''
     launch_selected = 0
-    cronometer.reset()
     ev3.light.on(Color.GREEN)
     while True:
         # Round selecionador
@@ -78,4 +81,3 @@ def start():
             elif launch_selected == 3:
                 launch_04.start()
                 cronometer.pause()
-                print(cronometer.time())

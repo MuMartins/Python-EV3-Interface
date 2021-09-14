@@ -17,7 +17,7 @@ ev3 = EV3Brick()
 
 # Definição das portas do brick
 light_sensor_01 = ColorSensor(Port.S1)
-light_sensor_02 = ColorSensor(Port.S2)
+# light_sensor_02 = ColorSensor(Port.S2)
 light_sensor_03 = ColorSensor(Port.S3)
 
 medium_A_motor = Motor(Port.A)
@@ -42,7 +42,7 @@ last_sensor_value = 1
 last_motor_value = 1
 
 
-def sensor_reflection(sensor_value=0, sensor_coordinate):
+def sensor_reflection(sensor_coordinate: int, sensor_value: int = 0):
     '''Função responsável por mostrar a leitura dos sensores na tela do brick'''
     global last_sensor_value
     # Define o tamanho da fonte do texto que será mostrado na tela do brick
@@ -58,7 +58,7 @@ def sensor_reflection(sensor_value=0, sensor_coordinate):
         last_sensor_value = sensor_value
 
 
-def motor_angle(motor_value=0, motor_coordinate):
+def motor_angle(motor_coordinate: int, motor_value: int = 0):
     '''Função responsável por mostrar a leitura dos motores na tela do brick'''
     global last_motor_value
     # Define o tamanho da fonte do texto que será mostrado na tela do brick
@@ -85,27 +85,27 @@ def start():
         # Sensores
         '''Inicia a leitura dos valores dos sensores'''
         sensor_value_01 = light_sensor_01.reflection()
-        sensor_reflection(sensor_value_01, 0)
+        sensor_reflection(0, sensor_value_01)
 
         sensor_value_02 = light_sensor_02.reflection()
-        sensor_reflection(sensor_value_02, 1)
+        sensor_reflection(1, sensor_value_02)
 
         sensor_value_03 = light_sensor_03.reflection()
-        sensor_reflection(sensor_value_03, 2)
+        sensor_reflection(2, sensor_value_03)
 
         # Motores
         '''Inicia a leitura dos valores dos motores'''
         motor_value_01 = medium_A_motor.angle()
-        motor_angle(motor_value_01, 3)
+        motor_angle(3, motor_value_01)
 
         motor_value_02 = left_motor.angle()
-        motor_angle(motor_value_02, 4)
+        motor_angle(4, motor_value_02)
 
         motor_value_03 = right_motor.angle()
-        motor_angle(motor_value_03, 5)
+        motor_angle(5, motor_value_03)
 
         motor_value_04 = medium_D_motor.angle()
-        motor_angle(motor_value_04, 6)
+        motor_angle(6, motor_value_04)
 
     # Reseta a tela do brick para voltar para o menu principal
     ev3.screen.clear()
