@@ -6,7 +6,6 @@ from pybricks.tools import wait
 
 import SYSTEM.battery as battery
 import SYSTEM.buttons as buttons
-import SYSTEM.check_conections as check_conections
 import INTERFACES.calibration as calibration
 import INTERFACES.menu_launches as menu_launches
 import INTERFACES.portview as portview
@@ -40,20 +39,16 @@ def set_state(_state):
     ev3.screen.load_image('./IMAGES/display_main_menu.png')
     ev3.screen.draw_box(*menu_states[state])
 
-    # Mostra o valor atual da bateria e faz a verificação das conexões do brick
+    # Mostra o valor atual da bateria
     battery.voltage_text()
 
 
 def main():
     '''Inicia e gerencia a tela principal da interface'''
     global state
-    battery.voltage_text()
-    check_conections.light_problems()
     set_state(state)
+    battery.voltage_text()
     while True:
-        # Verifica as conexões do brick mudando o led para vermelho caso haja algum erro
-        check_conections.light_problems()
-
         # Interface selecionador
         if buttons.pressed(Button.DOWN):
             while not buttons.released(Button.DOWN):
@@ -96,21 +91,6 @@ def main():
             elif state == 3:
                 portview.start()
 
-
-def debug():
-    '''Função para debug!'''
-    while True:
-        check_conections.light_problems()
-        wait(1000)
-
-
 # Estrutura de seleção responsável por executar apenas o arquivo com o nome "main"
 if __name__ == '__main__':
-    _debug = False
-    if _debug:
-        debug()
-    else:
-        try:
-            main()
-        except Exception as e:
-            print(e)
+    main()

@@ -38,6 +38,8 @@ def start():
     '''Inicia e gerencia a tela de saídas'''
     launch_selected = 0
     ev3.light.on(Color.GREEN)
+    ev3.screen.clear()
+    ev3.screen.load_image('./IMAGES/LAUNCHES/01')
     while True:
         # Round selecionador
         if buttons.pressed(Button.RIGHT):

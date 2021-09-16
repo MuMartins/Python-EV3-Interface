@@ -1,7 +1,7 @@
 #!/usr/bin/env pybricks-micropython
 # Importação dos módulos utilizados
 from pybricks.hubs import EV3Brick
-from pybricks.parameters import Color, Port
+from pybricks.parameters import Port
 from pybricks.ev3devices import ColorSensor
 
 

@@ -5,6 +5,7 @@ from pybricks.ev3devices import Motor
 from pybricks.parameters import Port, Stop, Button
 from pybricks.tools import wait
 from pybricks.robotics import DriveBase
+
 # from threading import Thread
 import multiprocessing
 from time import sleep
@@ -21,26 +22,27 @@ end_launch = False
 
 def launch():
     global end_launch
-    print('vbuce tacakvjfhagsfghuiasdfabhljksfjlahnhnljkafsasdfjkç')
+    print('inicio da saida')
     while not end_launch:
-        while True:
-            print('cu')
-            sleep(1)
-        """motor.reset_angle(Port.B)
-        motor.reset_angle(Port.C)
-        motor.run_angle(Port.B, speed=100, target_angle=10000, wait=False)
-        motor.run_angle(Port.C, speed=100, target_angle=10000, wait=True)"""
-        print('SAIDA 1 FINALIZADA')
-        end_launch = True
+        print('rodando a saida')
+        sleep(1)
+
+        # motor.reset_angle(Port.B)
+        # motor.reset_angle(Port.C)
+        # motor.run_angle(Port.B, speed=100, target_angle=10000, wait=False)
+        # motor.run_angle(Port.C, speed=100, target_angle=10000, wait=True)
+
+    print('SAIDA 1 FINALIZADA')
+    end_launch = True
 
 
 def start():
     global end_launch
-    """ a = Thread(target=launch)
-    a.start() """
+    # a = Thread(target=launch)
+    # a.start()
     a = multiprocessing.Process(target=launch, args=())
     a.start()
     while not end_launch:
         if buttons.pressed(Button.DOWN):
-            print('SAÍDA 1 FINALIZADA NA MARRA')
+            print('SAÍDA 1 FINALIZADA NA FORÇA')
             end_launch = True

@@ -2,11 +2,12 @@
 # Importação dos módulos utilizados
 from pybricks.hubs import EV3Brick
 from pybricks.parameters import Button, Color, Port
-from pybricks.ev3devices import Motor, ColorSensor, GyroSensor
 from pybricks.media.ev3dev import Font
 
 import SYSTEM.battery as battery
 import SYSTEM.buttons as buttons
+import SYSTEM.sensor as sensor
+import SYSTEM.motor as motor
 
 '''
 Arquivo responsável por mostrar o valor lido em cada uma das conexões do brick
@@ -14,16 +15,6 @@ Arquivo responsável por mostrar o valor lido em cada uma das conexões do brick
 
 # Definição do brick como ev3
 ev3 = EV3Brick()
-
-# Definição das portas do brick
-light_sensor_01 = ColorSensor(Port.S1)
-# light_sensor_02 = ColorSensor(Port.S2)
-light_sensor_03 = ColorSensor(Port.S3)
-
-medium_A_motor = Motor(Port.A)
-right_motor = Motor(Port.B)
-left_motor = Motor(Port.C)
-medium_D_motor = Motor(Port.D)
 
 
 ports_coordinates = [
@@ -42,7 +33,7 @@ last_sensor_value = 1
 last_motor_value = 1
 
 
-def sensor_reflection(sensor_coordinate: int, sensor_value: int = 0):
+def sensor_show(sensor_coordinate: int, sensor_value: int = 0):
     '''Função responsável por mostrar a leitura dos sensores na tela do brick'''
     global last_sensor_value
     # Define o tamanho da fonte do texto que será mostrado na tela do brick
@@ -50,6 +41,7 @@ def sensor_reflection(sensor_coordinate: int, sensor_value: int = 0):
     ev3.screen.set_font(portview_font)
 
     # Condição responsável por atualizar o texto mostrando a leitura dos sensores na tela do brick
+    '''Caso o valor atual lido pelo sensor seja diferente do ultimo valor lido'''
     if sensor_value != last_sensor_value:
         ev3.screen.draw_box(
             *ports_coordinates[sensor_coordinate], fill=True, color=Color.WHITE)
@@ -58,7 +50,7 @@ def sensor_reflection(sensor_coordinate: int, sensor_value: int = 0):
         last_sensor_value = sensor_value
 
 
-def motor_angle(motor_coordinate: int, motor_value: int = 0):
+def motor_show(motor_coordinate: int, motor_value: int = 0):
     '''Função responsável por mostrar a leitura dos motores na tela do brick'''
     global last_motor_value
     # Define o tamanho da fonte do texto que será mostrado na tela do brick
@@ -66,6 +58,7 @@ def motor_angle(motor_coordinate: int, motor_value: int = 0):
     ev3.screen.set_font(portview_font)
 
     # Condição responsável por atualizar o texto mostrando a leitura dos motores na tela do brick
+    
     if motor_value != last_motor_value:
         ev3.screen.draw_box(
             *ports_coordinates[motor_coordinate], fill=True, color=Color.WHITE)
@@ -84,28 +77,28 @@ def start():
 
         # Sensores
         '''Inicia a leitura dos valores dos sensores'''
-        sensor_value_01 = light_sensor_01.reflection()
-        sensor_reflection(0, sensor_value_01)
+        sensor_value_01 = sensor.reflection(Port.S1)
+        sensor_show(0, sensor_value_01)
 
-        sensor_value_02 = light_sensor_02.reflection()
-        sensor_reflection(1, sensor_value_02)
+        sensor_value_02 = sensor.reflection(Port.S2)
+        sensor_show(1, sensor_value_02)
 
-        sensor_value_03 = light_sensor_03.reflection()
-        sensor_reflection(2, sensor_value_03)
+        sensor_value_03 = sensor.reflection(Port.S3)
+        sensor_show(2, sensor_value_03)
 
         # Motores
         '''Inicia a leitura dos valores dos motores'''
-        motor_value_01 = medium_A_motor.angle()
-        motor_angle(3, motor_value_01)
+        motor_value_01 = motor.angle(Port.A)
+        motor_show(3, motor_value_01)
 
-        motor_value_02 = left_motor.angle()
-        motor_angle(4, motor_value_02)
+        motor_value_02 = motor.angle(Port.B)
+        motor_show(4, motor_value_02)
 
-        motor_value_03 = right_motor.angle()
-        motor_angle(5, motor_value_03)
+        motor_value_03 = motor.angle(Port.C)
+        motor_show(5, motor_value_03)
 
-        motor_value_04 = medium_D_motor.angle()
-        motor_angle(6, motor_value_04)
+        motor_value_04 = motor.angle(Port.D)
+        motor_show(6, motor_value_04)
 
     # Reseta a tela do brick para voltar para o menu principal
     ev3.screen.clear()

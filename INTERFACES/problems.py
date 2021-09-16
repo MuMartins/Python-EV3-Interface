@@ -65,27 +65,27 @@ def start():
 
         # Sensores
         '''Inicia a verificação das conexões dos sensores'''
-        sensor_connection_01 = check_conections.sensor(Port.S1)
+        sensor_connection_01 = check_conections.check_sensor(Port.S1)
         sensor_connection(sensor_connection_01, 0)
 
-        sensor_connection_02 = check_conections.sensor(Port.S2)
+        sensor_connection_02 = check_conections.check_sensor(Port.S2)
         sensor_connection(sensor_connection_02, 1)
 
-        sensor_connection_03 = check_conections.sensor(Port.S3)
+        sensor_connection_03 = check_conections.check_sensor(Port.S3)
         sensor_connection(sensor_connection_03, 2)
 
         # Motores
         '''Inicia a verificação das conexões dos motores'''
-        motor_connection_01 = check_conections.motor(Port.A)
+        motor_connection_01 = check_conections.check_motor(Port.A)
         motor_connection(motor_connection_01, 3)
 
-        motor_connection_02 = check_conections.motor(Port.B)
+        motor_connection_02 = check_conections.check_motor(Port.B)
         motor_connection(motor_connection_02, 4)
 
-        motor_connection_03 = check_conections.motor(Port.C)
+        motor_connection_03 = check_conections.check_motor(Port.C)
         motor_connection(motor_connection_03, 5)
 
-        motor_connection_04 = check_conections.motor(Port.D)
+        motor_connection_04 = check_conections.check_motor(Port.D)
         motor_connection(motor_connection_04, 6)
 
     # Reseta a tela do brick para voltar para o menu principal
