@@ -6,43 +6,39 @@ from pybricks.parameters import Port, Stop, Button
 from pybricks.tools import wait
 from pybricks.robotics import DriveBase
 
-# from threading import Thread
-import multiprocessing
-from time import sleep
+from threading import Thread
 
 import SYSTEM.cm_curve as cm_curve
-import SYSTEM.motor as motor
 import SYSTEM.buttons as buttons
+import SYSTEM.motor as motor
 
 # Definição do brick como ev3
 ev3 = EV3Brick()
 
+# Variável
 end_launch = False
 
 
 def launch():
-    global end_launch
-    print('inicio da saida')
     while not end_launch:
-        print('rodando a saida')
-        sleep(1)
-
-        # motor.reset_angle(Port.B)
-        # motor.reset_angle(Port.C)
-        # motor.run_angle(Port.B, speed=100, target_angle=10000, wait=False)
-        # motor.run_angle(Port.C, speed=100, target_angle=10000, wait=True)
-
-    print('SAIDA 1 FINALIZADA')
-    end_launch = True
+        motor.run_time(Port.B, 100, 10000, wait=False)
+        motor.run_time(Port.C, 100, 10000, wait=True)
+        wait(10)
 
 
 def start():
     global end_launch
-    # a = Thread(target=launch)
-    # a.start()
-    a = multiprocessing.Process(target=launch, args=())
-    a.start()
-    while not end_launch:
+    motor.hold(Port.B)
+    motor.hold(Port.C)
+
+    multi = Thread(target=launch, args=())
+    multi.start()
+
+    while True:
         if buttons.pressed(Button.DOWN):
-            print('SAÍDA 1 FINALIZADA NA FORÇA')
+            while not buttons.released(Button.DOWN):
+                wait(10)
             end_launch = True
+            motor.hold(Port.B)
+            motor.hold(Port.C)
+            break

@@ -46,8 +46,8 @@ def set_state(_state):
 def main():
     '''Inicia e gerencia a tela principal da interface'''
     global state
-    set_state(state)
     battery.voltage_text()
+    set_state(state)
     while True:
         # Interface selecionador
         if buttons.pressed(Button.DOWN):
@@ -90,6 +90,7 @@ def main():
 
             elif state == 3:
                 portview.start()
+
 
 # Estrutura de seleção responsável por executar apenas o arquivo com o nome "main"
 if __name__ == '__main__':

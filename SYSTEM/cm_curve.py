@@ -12,12 +12,12 @@ Arquivo responsável pelos blocos de centimetros e curva
 # Definição do brick como ev3
 ev3 = EV3Brick()
 
-# Definição das portas do brick
-left_motor = Motor(Port.B)
-right_motor = Motor(Port.C)
+# # Definição das portas do brick
+# left_motor = Motor(Port.B)
+# right_motor = Motor(Port.C)
 
-# Definindo o DriveBase (em milimetros)
-robot = DriveBase(left_motor, right_motor, wheel_diameter=49.5, axle_track=95)
+# # Definindo o DriveBase (em milimetros)
+# robot = DriveBase(left_motor, right_motor, wheel_diameter=49.5, axle_track=95)
 
 # Definindo o bloco que converte centimetros para milimetros na hora andar com o robô
 
