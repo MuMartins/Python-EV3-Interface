@@ -20,10 +20,26 @@ end_launch = False
 
 
 def launch():
+    global end_launch
     while not end_launch:
-        motor.run_time(Port.B, 100, 10000, wait=False)
-        motor.run_time(Port.C, 100, 10000, wait=True)
+        motor.run_time(Port.B, 100, 10, then=Stop.HOLD, wait=False)
+        motor.run_time(Port.C, 100, 10, then=Stop.HOLD, wait=True)
+        print('ok')
+        motor.run_angle(Port.B, 100, 360, then=Stop.HOLD, wait=False)
+        motor.run_angle(Port.C, 100, 360, then=Stop.HOLD, wait=True)
+        print('ok')
+        motor.run_angle(Port.B, 100, -360, then=Stop.HOLD, wait=False)
+        motor.run_angle(Port.C, 100, -360, then=Stop.HOLD, wait=True)
+        print('ok')
+        motor.run_time(Port.B, 100, 10, then=Stop.HOLD, wait=False)
+        motor.run_time(Port.C, 100, 10, then=Stop.HOLD, wait=True)
+        print('acabou a saida 3')
         wait(10)
+        end_launch = True
+
+    if end_launch == True:
+        motor.hold(Port.B)
+        motor.hold(Port.C)
 
 
 def start():
@@ -34,11 +50,10 @@ def start():
     multi = Thread(target=launch, args=())
     multi.start()
 
-    while True:
+    while not end_launch:
         if buttons.pressed(Button.DOWN):
             while not buttons.released(Button.DOWN):
                 wait(10)
             end_launch = True
             motor.hold(Port.B)
             motor.hold(Port.C)
-            break
